@@ -119,6 +119,7 @@
     <Content Include="Entitlements.plist" />
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork%402x" />
+    <Compile Include="Views\Child\DetailViewController.cs" />
     <Compile Include="Views\Main\MainViewController.cs" />
     <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
       <Visible>false</Visible>
