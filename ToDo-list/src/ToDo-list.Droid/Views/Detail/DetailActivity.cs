@@ -28,6 +28,7 @@ namespace ToDo_list.Droid.Views.Detail
             SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.abc_ic_ab_back_material);
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
+            SupportActionBar.Title = "ToDo-list.Details";
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

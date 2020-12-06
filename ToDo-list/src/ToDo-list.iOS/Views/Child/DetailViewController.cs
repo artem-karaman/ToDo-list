@@ -14,7 +14,7 @@ namespace ToDo_list.iOS.Views.Child
         {
             base.ViewDidLoad();
 
-            Title = "ToDo-list";
+            Title = "ToDo-list.Details";
 
             View.BackgroundColor = UIColor.White;
         }

@@ -22,6 +22,8 @@ namespace ToDo_list.iOS.Views.Main
             TableView.Source = _tableViewSource;
 
             CreateBindings();
+
+            ViewModel.LoadTasksCommandAsync.ExecuteAsync();
         }
 
         private void CreateBindings()
@@ -30,12 +32,12 @@ namespace ToDo_list.iOS.Views.Main
 
             bindingSet
                 .Bind(_tableViewSource)
-                .To(vm => vm.TaskNames);
+                .To(vm => vm.Tasks);
             
             bindingSet
                 .Bind(_tableViewSource)
                 .For(t => t.SelectionChangedCommand)
-                .To(vm => vm.NavigateToChildCommand);
+                .To(vm => vm.NavigateToChildCommandAsync);
 
             bindingSet.Apply();
         }
