@@ -24,12 +24,12 @@ namespace ToDo_list.Core.ViewModels.Main
 			_dataStore = dataStore;
 
 			Tasks = new ObservableCollection<TaskModel>();
-			NavigateToChildCommandAsync = new MvxAsyncCommand(ShowChildCommandExecute);
+			NavigateToChildCommandAsync = new MvxAsyncCommand<TaskModel>(ShowChildCommandExecute);
 			LoadTasksCommandAsync = new MvxAsyncCommand(LoadTasksAsyncCommandExecute);
         }
 
         public ObservableCollection<TaskModel> Tasks { get; set; }
-		public IMvxAsyncCommand NavigateToChildCommandAsync { get; }
+		public IMvxAsyncCommand<TaskModel> NavigateToChildCommandAsync { get; }
         public IMvxAsyncCommand LoadTasksCommandAsync { get; }
 
 		private async Task LoadTasksAsyncCommandExecute()
@@ -42,7 +42,8 @@ namespace ToDo_list.Core.ViewModels.Main
 			}
 		}
 
-        private async Task ShowChildCommandExecute() => await NavigationService.Navigate<DetailViewModel>();
+        private async Task ShowChildCommandExecute(TaskModel model) 
+            => await NavigationService.Navigate<DetailViewModel, TaskModel>(model);
 
 	}
 }
