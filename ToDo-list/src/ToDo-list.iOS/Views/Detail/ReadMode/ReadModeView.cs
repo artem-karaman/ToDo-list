@@ -1,11 +1,15 @@
 ﻿using Cirrious.FluentLayouts.Touch;
-using MvvmCross.Platforms.Ios.Views;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Platforms.Ios.Binding.Views;
+using ToDo_list.Core.Converters;
+using ToDo_list.Core.Models;
 using ToDo_list.Core.ViewModels.Child;
+using ToDo_list.Core.ViewModels.Details;
 using UIKit;
 
-namespace ToDo_list.iOS.Views.Child
+namespace ToDo_list.iOS.Views.Detail.ReadMode
 {
-    public class DetailViewController : MvxViewController<DetailViewModel>
+    public class ReadModeView : MvxView
     {
         private UILabel _titleLabel;
         private UILabel _descriptionLabel;
@@ -17,17 +21,11 @@ namespace ToDo_list.iOS.Views.Child
         private UILabel _createdDateLabelName;
         private UILabel _currentStatusLabelName;
 
-        public override void ViewDidLoad()
+        public ReadModeView()
         {
-            base.ViewDidLoad();
-
-            Title = "ToDo-list.Details";
-
-            View.BackgroundColor = UIColor.White;
-
             CreateUI();
             CreateLayout();
-            
+
             CreateBindings();
         }
 
@@ -40,7 +38,7 @@ namespace ToDo_list.iOS.Views.Child
 
             _titleLabelName = new UILabel
             {
-                Text = "Task name: " ,
+                Text = "Task name: ",
                 TextColor = UIColor.Gray
             };
 
@@ -69,7 +67,7 @@ namespace ToDo_list.iOS.Views.Child
                 TextColor = UIColor.Gray
             };
 
-            View.AddSubviews(
+            this.AddSubviews(
                 _titleLabel,
                 _descriptionLabel,
                 _createdDateLabel,
@@ -82,17 +80,17 @@ namespace ToDo_list.iOS.Views.Child
 
         private void CreateLayout()
         {
-            View.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+            this.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
 
-            View.AddConstraints(
-                _titleLabelName.AtTopOfSafeArea(View, 40),
-                _titleLabelName.AtLeftOf(View, 20),
-                _titleLabelName.AtRightOf(View, 20),
+            this.AddConstraints(
+                _titleLabelName.AtTopOf(this, 40),
+                _titleLabelName.AtLeftOf(this, 20),
+                _titleLabelName.AtRightOf(this, 20),
                 _titleLabelName.Height().EqualTo(20),
 
                 _titleLabel.Below(_titleLabelName, 5),
-                _titleLabel.AtLeftOf(View,20),
-                _titleLabel.AtRightOf(View, 20),
+                _titleLabel.AtLeftOf(this, 20),
+                _titleLabel.AtRightOf(this, 20),
                 _titleLabel.Height().GreaterThanOrEqualTo(20),
 
                 _descriptionLabelName.Below(_titleLabel, 25),
@@ -105,7 +103,7 @@ namespace ToDo_list.iOS.Views.Child
                 _descriptionLabel.WithSameRight(_titleLabel),
                 _descriptionLabel.Height().GreaterThanOrEqualTo(100),
 
-                _createdDateLabel.AtBottomOfSafeArea(View, 20),
+                _createdDateLabel.AtBottomOfSafeArea(this, 20),
                 _createdDateLabel.WithSameLeft(_descriptionLabel),
                 _createdDateLabel.Width().GreaterThanOrEqualTo(50),
                 _createdDateLabel.Height().GreaterThanOrEqualTo(20),
@@ -128,25 +126,29 @@ namespace ToDo_list.iOS.Views.Child
 
         private void CreateBindings()
         {
-            var bindingSet = CreateBindingSet();
+            this.DelayBind(() =>
+            {
+                var bindingSet = this.CreateBindingSet<ReadModeView, TaskViewModel>();
 
-            bindingSet
-                .Bind(_titleLabel)
-                .To(vm => vm.Model.Name);
+                bindingSet
+                    .Bind(_titleLabel)
+                    .To(vm => vm.Name);
 
-            bindingSet
-                .Bind(_descriptionLabel)
-                .To(vm => vm.Model.Description);
+                bindingSet
+                    .Bind(_descriptionLabel)
+                    .To(vm => vm.Description);
 
-            bindingSet
-                .Bind(_createdDateLabel)
-                .To(vm => vm.Model.CreatedDate);
+                bindingSet
+                    .Bind(_createdDateLabel)
+                    .To(vm => vm.CreatedDate)
+                    .WithConversion<DateToStringValueConverter>();
 
-            bindingSet
-                .Bind(_currentStatusLabel)
-                .To(vm => vm.Model.Status);
-            
-            bindingSet.Apply();
+                bindingSet
+                    .Bind(_currentStatusLabel)
+                    .To(vm => vm.Status);
+
+                bindingSet.Apply();
+            });
         }
     }
 }

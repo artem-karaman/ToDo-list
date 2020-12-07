@@ -11,19 +11,29 @@ namespace ToDo_list.iOS.Views.Main
     {
         private UIBarButtonItem _testButton;
         private MvxStandardTableViewSource _tableViewSource;
+        private UIBarButtonItem _addTaskButton;
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            Title = "ToDo-list";
 
-            _tableViewSource = new MvxStandardTableViewSource(TableView);
-            
-            TableView.Source = _tableViewSource;
-
-            CreateBindings();
+            PrepareUI();
 
             ViewModel.LoadTasksCommandAsync.ExecuteAsync();
+
+            CreateBindings();
+        }
+
+        private void PrepareUI()
+        {
+            Title = "ToDo-list";
+
+            _tableViewSource = new MvxStandardTableViewSource(TableView, "TitleText Name");
+            TableView.Source = _tableViewSource;
+
+            _addTaskButton = new UIBarButtonItem(UIBarButtonSystemItem.Add);
+            
+            NavigationItem.RightBarButtonItem = _addTaskButton;
         }
 
         private void CreateBindings()
@@ -37,7 +47,11 @@ namespace ToDo_list.iOS.Views.Main
             bindingSet
                 .Bind(_tableViewSource)
                 .For(t => t.SelectionChangedCommand)
-                .To(vm => vm.NavigateToChildCommandAsync);
+                .To(vm => vm.NavigateToDetailViewModelCommandAsync);
+
+            bindingSet
+                .Bind(_addTaskButton)
+                .To(vm => vm.NavigateToCreateTaskCommandAsync);
 
             bindingSet.Apply();
         }

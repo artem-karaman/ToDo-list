@@ -3,25 +3,24 @@ using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using ToDo_list.Core.Models;
+using ToDo_list.Core.ViewModels.Details;
 
 namespace ToDo_list.Core.ViewModels.Child
 {
-    public class DetailViewModel : MvxNavigationViewModel<TaskModel>
+    public class DetailViewModel : MvxNavigationViewModel<TaskViewModel>
     {
-        private TaskModel _model;
+        private TaskViewModel _model;
 
         public DetailViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) 
             : base(logProvider, navigationService)
         {
         }
 
-        public override void Prepare(TaskModel model)
+        public override void Prepare(TaskViewModel model)
         {
-            _ = model ?? throw new ArgumentNullException(nameof(model));
-
             _model = model;
         }
 
-        public TaskModel Model => _model;
+        public TaskViewModel Model => _model;
     }
 }
