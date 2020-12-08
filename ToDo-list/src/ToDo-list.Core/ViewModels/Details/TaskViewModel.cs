@@ -1,4 +1,5 @@
 ﻿using System;
+using MvvmCross.Commands;
 using MvvmCross.ViewModels;
 using ToDo_list.Core.Models;
 
@@ -13,6 +14,13 @@ namespace ToDo_list.Core.ViewModels.Details
         {
             _taskModel = taskModel;
             _mode = mode;
+
+            SetSelectedStatus = new MvxCommand<Status>(SelectedStatusCommandExecute);
+        }
+
+        private void SelectedStatusCommandExecute(Status model)
+        {
+            Status = model;
         }
 
         public Mode Mode => _mode;
@@ -37,17 +45,22 @@ namespace ToDo_list.Core.ViewModels.Details
             }
         }
 
+        public string[] Statuses => Enum.GetNames(typeof(Status));
+
+
         public Status Status
         {
             get => _taskModel.Status;
             set
             {
                 _taskModel.Status = value;
-                RaisePropertyChanged(() => Name);
+                RaisePropertyChanged(() => Status);
             }
         }
 
         public DateTime CreatedDate => _taskModel.CreatedDate;
+
+        public IMvxCommand<Status> SetSelectedStatus { get; }
 
     }
 }

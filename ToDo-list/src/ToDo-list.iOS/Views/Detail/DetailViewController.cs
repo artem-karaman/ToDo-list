@@ -66,6 +66,11 @@ namespace ToDo_list.iOS.Views.Child
                 .To(vm => vm.Model);
 
             bindingSet
+                .Bind(_editModeView)
+                .For(v => v.DataContext)
+                .To(vm => vm.Model);
+
+            bindingSet
                 .Bind(_readModeView)
                 .For(v => v.BindVisible())
                 .To(vm => vm.Model.Mode)
