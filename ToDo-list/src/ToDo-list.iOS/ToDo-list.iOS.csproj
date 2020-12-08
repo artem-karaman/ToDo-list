@@ -9,6 +9,7 @@
     <RootNamespace>ToDo_list.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>ToDo_list.iOS</AssemblyName>
+    <ProvisioningType>manual</ProvisioningType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -68,6 +69,9 @@
     <MtouchLink>SdkOnly</MtouchLink>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <AppExtensionDebugBundleId />
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Linker\LinkerPleaseInclude.cs" />
     <Compile Include="Main.cs" />
@@ -75,6 +79,7 @@
     <Compile Include="Setup.cs" />
     <Compile Include="Views\Detail\EditMode\EditModeView.cs" />
     <Compile Include="Views\Detail\ReadMode\ReadModeView.cs" />
+    <Compile Include="Views\Main\TableView\Source\MvxDeleteRowStandardTableViewSource.cs" />
     <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-87.png">
       <Visible>false</Visible>
     </ImageAsset>

@@ -1,4 +1,5 @@
-﻿using Cirrious.FluentLayouts.Touch;
+﻿using System.Drawing;
+using Cirrious.FluentLayouts.Touch;
 using CoreGraphics;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
@@ -35,8 +36,13 @@ namespace ToDo_list.iOS.Views.Detail.EditMode
 
             _titleText = new UITextField()
             {
-                Placeholder = "Enter task title"
+                Placeholder = "Enter task title",
+                
             };
+
+            _titleText.Layer.BorderWidth = 1;
+            _titleText.Layer.BorderColor = UIColor.Gray.CGColor;
+
 
             _titleLabel = new UILabel
             {
@@ -45,6 +51,8 @@ namespace ToDo_list.iOS.Views.Detail.EditMode
             };
 
             _descriptionTextView = new UITextView();
+            _descriptionTextView.Layer.BorderWidth = 1;
+            _descriptionTextView.Layer.BorderColor = UIColor.Gray.CGColor;
 
             _descriptionLabel = new UILabel
             {
@@ -81,8 +89,8 @@ namespace ToDo_list.iOS.Views.Detail.EditMode
             _toolBar = new UIToolbar(new CGRect(0, 0, 320, 44));
             UIBarButtonItem flexibleSpaceLeft = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, null, null);
             UIBarButtonItem doneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, this, new ObjCRuntime.Selector("DoneAction"));
-            UIBarButtonItem[] list = { flexibleSpaceLeft, doneButton };
-            _toolBar.SetItems(list, false);
+            UIBarButtonItem[] items = { flexibleSpaceLeft, doneButton };
+            _toolBar.SetItems(items, false);
         }
 
         private void CreateLayout()

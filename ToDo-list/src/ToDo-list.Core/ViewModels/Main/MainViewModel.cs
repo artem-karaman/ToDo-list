@@ -27,12 +27,14 @@ namespace ToDo_list.Core.ViewModels.Main
             NavigateToDetailViewModelCommandAsync = new MvxAsyncCommand<TaskModel>(ShowDetailViewModelCommandExecute);
             NavigateToCreateTaskCommandAsync = new MvxAsyncCommand(ShowDetailViewModelToCrateTaskCommandExecute);
             LoadTasksCommandAsync = new MvxAsyncCommand(LoadTasksAsyncCommandExecute);
+            DeleteTaskAsyncCommand = new MvxAsyncCommand<TaskModel>(DeleteTaskAsyncCommandExecute);
         }
 
         public ObservableCollection<TaskModel> Tasks { get; set; }
         public IMvxAsyncCommand<TaskModel> NavigateToDetailViewModelCommandAsync { get; }
         public IMvxAsyncCommand NavigateToCreateTaskCommandAsync { get; }
         public IMvxAsyncCommand LoadTasksCommandAsync { get; }
+        public IMvxAsyncCommand<TaskModel> DeleteTaskAsyncCommand { get; } 
 
         private async Task LoadTasksAsyncCommandExecute()
         {
@@ -70,6 +72,14 @@ namespace ToDo_list.Core.ViewModels.Main
                 }, Mode.Add);
 
             await NavigationService.Navigate<DetailViewModel, TaskViewModel>(taskViewModel);
+        }
+         
+        private async Task DeleteTaskAsyncCommandExecute(TaskModel model)
+        {
+            if (await _dataStore.DeleteItemAsync(model))
+            {
+                await LoadTasksAsyncCommandExecute();
+            }
         }
     }
 }
