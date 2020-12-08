@@ -12,7 +12,7 @@ jobs:
         cd ToDo-list
         nuget restore
         cd src/ToDo-list.Droid
-        msbuild ToDo-list.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
+        msbuild ToDo-list.Droid.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
         
   iOS:
     runs-on: macos-latest
