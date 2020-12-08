@@ -1,7 +1,8 @@
 ﻿using Cirrious.FluentLayouts.Touch;
+using CoreGraphics;
+using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Binding.Views;
-using ToDo_list.Core.Converters;
 using ToDo_list.Core.ViewModels.Details;
 using UIKit;
 
@@ -19,13 +20,13 @@ namespace ToDo_list.iOS.Views.Detail.EditMode
         private MvxPickerViewModel _mvxPickerModel;
 
         private UIPickerView _pickerView;
+        private UIToolbar _toolBar;
 
         public EditModeView()
         {
-
+            CreateToolbarForPickerView();
             CreateUI();
             CreateLayout();
-
             CreateBindings();
         }
 
@@ -58,13 +59,13 @@ namespace ToDo_list.iOS.Views.Detail.EditMode
             _pickerView.Model = _mvxPickerModel;
 
             _pickerTextField.InputView = _pickerView;
+            _pickerTextField.InputAccessoryView = _toolBar;
 
             _currentStatusLabel = new UILabel
             {
                 Text = "Current task status: ",
                 TextColor = UIColor.Gray
             };
-
 
             AddSubviews(
                 _titleLabel, 
@@ -73,6 +74,15 @@ namespace ToDo_list.iOS.Views.Detail.EditMode
                 _descriptionTextView,
                 _currentStatusLabel,
                 _pickerTextField);
+        }
+
+        private void CreateToolbarForPickerView()
+        {
+            _toolBar = new UIToolbar(new CGRect(0, 0, 320, 44));
+            UIBarButtonItem flexibleSpaceLeft = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, null, null);
+            UIBarButtonItem doneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, this, new ObjCRuntime.Selector("DoneAction"));
+            UIBarButtonItem[] list = { flexibleSpaceLeft, doneButton };
+            _toolBar.SetItems(list, false);
         }
 
         private void CreateLayout()
@@ -103,8 +113,7 @@ namespace ToDo_list.iOS.Views.Detail.EditMode
                 _currentStatusLabel.Below(_descriptionTextView, 10),
                 _currentStatusLabel.WithSameLeft(_titleLabel),
                 _currentStatusLabel.WithSameRight(_titleLabel),
-                _currentStatusLabel.WithSameHeight(_titleLabel)
-                ,
+                _currentStatusLabel.WithSameHeight(_titleLabel),
 
                 _pickerTextField.Below(_currentStatusLabel, 5),
                 _pickerTextField.WithSameLeft(_currentStatusLabel),
@@ -132,15 +141,25 @@ namespace ToDo_list.iOS.Views.Detail.EditMode
                 bindingSet
                     .Bind(_mvxPickerModel)
                     .For(v => v.SelectedChangedCommand)
-                    .To(vm => vm.SetSelectedStatus);
+                    .To(vm => vm.StatusChangedCommand);
 
                 bindingSet
                     .Bind(_pickerTextField)
                     .To(vm => vm.Status);
 
+                bindingSet
+                    .Bind(_descriptionTextView)
+                    .To(vm => vm.Description);
+
                 bindingSet.Apply();
 
             });
+        }
+
+        [Export("DoneAction")]
+        private void DoneAction()
+        {
+            _pickerTextField.ResignFirstResponder();
         }
     }
 }

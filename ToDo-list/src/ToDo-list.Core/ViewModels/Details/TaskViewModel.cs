@@ -1,27 +1,30 @@
 ﻿using System;
+using MvvmCross;
 using MvvmCross.Commands;
+using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using ToDo_list.Core.Models;
+using ToDo_list.Core.Services;
 
 namespace ToDo_list.Core.ViewModels.Details
 {
     public class TaskViewModel : MvxViewModel
     {
         private readonly TaskModel _taskModel;
-        private readonly Mode _mode;
+        private Mode _mode;
+
+        private readonly IDataStore<TaskModel> _dataStore = Mvx.IoCProvider.Resolve<IDataStore<TaskModel>>();
+        private readonly IMvxNavigationService _navigationService = Mvx.IoCProvider.Resolve<IMvxNavigationService>();
 
         public TaskViewModel(TaskModel taskModel, Mode mode)
         {
             _taskModel = taskModel;
             _mode = mode;
 
-            SetSelectedStatus = new MvxCommand<Status>(SelectedStatusCommandExecute);
+            StatusChangedCommand = new MvxCommand<Status>(StatusChangedCommandExecute);
         }
 
-        private void SelectedStatusCommandExecute(Status model)
-        {
-            Status = model;
-        }
+        public TaskModel TaskModel => _taskModel;
 
         public Mode Mode => _mode;
 
@@ -47,11 +50,10 @@ namespace ToDo_list.Core.ViewModels.Details
 
         public string[] Statuses => Enum.GetNames(typeof(Status));
 
-
         public Status Status
         {
             get => _taskModel.Status;
-            set
+            private set
             {
                 _taskModel.Status = value;
                 RaisePropertyChanged(() => Status);
@@ -59,8 +61,18 @@ namespace ToDo_list.Core.ViewModels.Details
         }
 
         public DateTime CreatedDate => _taskModel.CreatedDate;
+        public IMvxCommand<Status> StatusChangedCommand { get; }
 
-        public IMvxCommand<Status> SetSelectedStatus { get; }
+        public void ChangeMode(Mode mode)
+        {
+            _mode = mode;
 
+            RaisePropertyChanged(() => Mode);
+        }
+
+        private void StatusChangedCommandExecute(Status status)
+        {
+            Status = status;
+        }
     }
 }

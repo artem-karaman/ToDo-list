@@ -4,7 +4,7 @@ using Android.OS;
 using Android.Views;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.Platforms.Android.Views;
-using ToDo_list.Core.ViewModels.Child;
+using ToDo_list.Core.ViewModels.Details;
 
 namespace ToDo_list.Droid.Views.Detail
 {

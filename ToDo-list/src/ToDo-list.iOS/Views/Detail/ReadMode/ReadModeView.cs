@@ -2,8 +2,6 @@
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Binding.Views;
 using ToDo_list.Core.Converters;
-using ToDo_list.Core.Models;
-using ToDo_list.Core.ViewModels.Child;
 using ToDo_list.Core.ViewModels.Details;
 using UIKit;
 
@@ -103,7 +101,7 @@ namespace ToDo_list.iOS.Views.Detail.ReadMode
                 _descriptionLabel.WithSameRight(_titleLabel),
                 _descriptionLabel.Height().GreaterThanOrEqualTo(100),
 
-                _createdDateLabel.AtBottomOfSafeArea(this, 20),
+                _createdDateLabel.Below(_descriptionLabel, 40),
                 _createdDateLabel.WithSameLeft(_descriptionLabel),
                 _createdDateLabel.Width().GreaterThanOrEqualTo(50),
                 _createdDateLabel.Height().GreaterThanOrEqualTo(20),

@@ -7,7 +7,6 @@ using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using ToDo_list.Core.Models;
 using ToDo_list.Core.Services;
-using ToDo_list.Core.ViewModels.Child;
 using ToDo_list.Core.ViewModels.Details;
 
 namespace ToDo_list.Core.ViewModels.Main
@@ -32,7 +31,6 @@ namespace ToDo_list.Core.ViewModels.Main
 
         public ObservableCollection<TaskModel> Tasks { get; set; }
         public IMvxAsyncCommand<TaskModel> NavigateToDetailViewModelCommandAsync { get; }
-
         public IMvxAsyncCommand NavigateToCreateTaskCommandAsync { get; }
         public IMvxAsyncCommand LoadTasksCommandAsync { get; }
 
@@ -40,14 +38,24 @@ namespace ToDo_list.Core.ViewModels.Main
         {
             var tasks = await _dataStore.GetItemsAsync();
 
+            Tasks.Clear();
+
             foreach (var task in tasks)
             {
                 Tasks.Add(task);
             }
         }
 
+        public override async void ViewAppeared()
+        {
+            await LoadTasksAsyncCommandExecute();
+        }
+
         private async Task ShowDetailViewModelCommandExecute(TaskModel model)
-            => await NavigationService.Navigate<DetailViewModel, TaskViewModel>(new TaskViewModel(model, Mode.Read));
+        {
+            await NavigationService.Navigate<DetailViewModel, TaskViewModel>(
+                new TaskViewModel(model, Mode.Read));
+        }
 
         private async Task ShowDetailViewModelToCrateTaskCommandExecute()
         {
@@ -63,7 +71,5 @@ namespace ToDo_list.Core.ViewModels.Main
 
             await NavigationService.Navigate<DetailViewModel, TaskViewModel>(taskViewModel);
         }
-
-
     }
 }

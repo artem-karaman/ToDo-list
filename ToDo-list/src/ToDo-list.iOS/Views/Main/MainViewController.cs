@@ -30,6 +30,7 @@ namespace ToDo_list.iOS.Views.Main
 
             _tableViewSource = new MvxStandardTableViewSource(TableView, "TitleText Name");
             TableView.Source = _tableViewSource;
+            TableView.TableFooterView = new UIView();
 
             _addTaskButton = new UIBarButtonItem(UIBarButtonSystemItem.Add);
             

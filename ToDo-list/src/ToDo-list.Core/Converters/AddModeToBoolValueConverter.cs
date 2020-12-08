@@ -5,11 +5,11 @@ using ToDo_list.Core.Models;
 
 namespace ToDo_list.Core.Converters
 {
-    public class EditModeToBoolConversion : MvxValueConverter<Mode, bool>
+    public class AddModeToBoolValueConverter : MvxValueConverter<Mode, bool>
     {
         protected override bool Convert(Mode value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value != Mode.Read;
+            return value == Mode.Add;
         }
     }
 }
