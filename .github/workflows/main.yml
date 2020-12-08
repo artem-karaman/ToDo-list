@@ -1,0 +1,25 @@
+name: CI on Push and Pull Request
+
+on: [push, pull_request]
+
+jobs: 
+  Android:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Android
+      run: |
+        cd ToDo-list
+        nuget restore
+        cd src/ToDo-list.Android
+        msbuild ToDo-list.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
+        
+  iOS:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: iOS
+      run: |
+        cd ToDo-list
+        nuget restore
+        msbuild src/ToDo-list.iOS/ToDo-list.iOS.csproj /verbosity:normal /t:Rebuild /p:Platform=iPhoneSimulator /p:Configuration=Debug
