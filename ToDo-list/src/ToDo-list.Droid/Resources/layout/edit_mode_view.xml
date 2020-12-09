@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    local:MvxBind="Visibility EditOrAddVisibility(Model.Mode)">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:height="20dp"
+        android:text="@string/task_name"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        local:MvxBind="Text Model.Name"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:height="20dp"
+        android:text="@string/description_title"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        local:MvxBind="Text Model.Description"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:height="20dp"
+        android:text="@string/status_title"
+        android:layout_margin="10dp"/>
+
+    <mvvmcross.platforms.android.binding.views.MvxSpinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        local:MvxBind="ItemsSource Model.Statuses;"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/update_task_button_title"
+        local:MvxBind="Click UpdateTaskCommand; Visibility EditModeVisibility(Model.Mode)"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_task_button_title"
+        local:MvxBind="Click SaveTaskCommand; Visibility AddModeVisibility(Model.Mode)"/>
+
+</LinearLayout>

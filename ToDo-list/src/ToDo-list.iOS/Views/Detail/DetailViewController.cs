@@ -143,13 +143,13 @@ namespace ToDo_list.iOS.Views.Child
                 .Bind(_readModeView)
                 .For(v => v.BindVisible())
                 .To(vm => vm.Model.Mode)
-                .WithConversion<ReadModeToBoolConverter>();
+                .WithConversion<ReadModeToBoolValueConverter>();
 
             bindingSet
                 .Bind(_editModeView)
                 .For(v => v.BindVisible())
                 .To(vm => vm.Model.Mode)
-                .WithConversion<EditModeToBoolConversion>();
+                .WithConversion<EditModeToBoolValueConverter>();
 
             bindingSet
                 .Bind(_addTaskButton)

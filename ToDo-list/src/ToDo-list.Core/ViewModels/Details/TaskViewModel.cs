@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using MvvmCross;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
@@ -62,6 +63,8 @@ namespace ToDo_list.Core.ViewModels.Details
 
         public DateTime CreatedDate => _taskModel.CreatedDate;
         public IMvxCommand<Status> StatusChangedCommand { get; }
+
+        public IMvxCommand<int> StatusIntChangedCommand { get; }
 
         public void ChangeMode(Mode mode)
         {

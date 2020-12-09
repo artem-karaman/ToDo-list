@@ -1,20 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout 
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:fitsSystemWindows="true">
-	<include
-		android:id="@+id/layout_toolbar"
-		layout="@layout/layout_toolbar" />
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:orientation="vertical"
+        android:fitsSystemWindows="true">
 
-	<RelativeLayout
-		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+    <include
+            android:id="@+id/layout_toolbar"
+            layout="@layout/toolbar"/>
 
-		<FrameLayout
-			android:id="@+id/content_frame"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent" />
-	</RelativeLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <include
+		android:id="@+id/layout_read_mode"
+		layout="@layout/read_mode_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <include
+	    android:id="@+id/layout_edit_mode"
+	    layout="@layout/edit_mode_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+   
+</LinearLayout>
