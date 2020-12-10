@@ -28,7 +28,7 @@ namespace ToDo_list.Core.Services
 									  " Excepteur sint occaecat cupidatat non proident, " +
 									  "sunt in culpa qui officia deserunt mollit anim id est laborum.",
 						CreatedDate = DateTime.Now,
-						Status = Status.Opened
+						Status = (int)Status.Opened
 					},
 					new TaskModel
 					{
@@ -42,7 +42,7 @@ namespace ToDo_list.Core.Services
 									  " Excepteur sint occaecat cupidatat non proident, " +
 									  "sunt in culpa qui officia deserunt mollit anim id est laborum.",
 						CreatedDate = DateTime.Now + TimeSpan.FromDays(2),
-						Status = Status.Completed
+						Status = (int)Status.Completed
 					},
 					new TaskModel
 					{
@@ -56,7 +56,7 @@ namespace ToDo_list.Core.Services
 									  " Excepteur sint occaecat cupidatat non proident, " +
 									  "sunt in culpa qui officia deserunt mollit anim id est laborum.",
 						CreatedDate = DateTime.Now + TimeSpan.FromDays(1),
-						Status = Status.InProgress
+						Status = (int)Status.InProgress
 					}
 				});
 		}

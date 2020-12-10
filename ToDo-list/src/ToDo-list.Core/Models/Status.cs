@@ -1,6 +1,6 @@
 ﻿namespace ToDo_list.Core.Models
 {
-    public enum Status
+    public enum Status 
     {
         Opened,
         InProgress,

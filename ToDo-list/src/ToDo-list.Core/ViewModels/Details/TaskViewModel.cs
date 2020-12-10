@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using MvvmCross;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
@@ -35,6 +34,7 @@ namespace ToDo_list.Core.ViewModels.Details
             set
             {
                 _taskModel.Name = value;
+
                 RaisePropertyChanged(() => Name);
             }
         }
@@ -53,18 +53,16 @@ namespace ToDo_list.Core.ViewModels.Details
 
         public Status Status
         {
-            get => _taskModel.Status;
+            get => (Status)_taskModel.Status;
             private set
             {
-                _taskModel.Status = value;
+                _taskModel.Status = (int)value;
                 RaisePropertyChanged(() => Status);
             }
         }
 
-        public DateTime CreatedDate => _taskModel.CreatedDate;
+        public DateTimeOffset CreatedDate => _taskModel.CreatedDate;
         public IMvxCommand<Status> StatusChangedCommand { get; }
-
-        public IMvxCommand<int> StatusIntChangedCommand { get; }
 
         public void ChangeMode(Mode mode)
         {

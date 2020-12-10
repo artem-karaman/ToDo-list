@@ -8,5 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="MvvmCross" Version="7.1.2" />
+    <PackageReference Include="sqlite-net-standard" Version="1.5.1" />
   </ItemGroup>
 </Project>

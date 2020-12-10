@@ -68,7 +68,7 @@ namespace ToDo_list.Core.ViewModels.Main
                     Description = string.Empty,
                     Id = Guid.NewGuid().ToString(),
                     Name = string.Empty,
-                    Status = Status.Opened
+                    Status = (int)Status.Opened
                 }, Mode.Add);
 
             await NavigationService.Navigate<DetailViewModel, TaskViewModel>(taskViewModel);

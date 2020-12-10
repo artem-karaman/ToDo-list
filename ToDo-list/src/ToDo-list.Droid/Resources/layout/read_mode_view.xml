@@ -9,43 +9,80 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:height="20dp"
         android:text="@string/task_name"
-        android:layout_margin="10dp"
-            />
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_tiny"
+        />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:height="20dp"
+        android:textColor="@android:color/black"
         local:MvxBind="Text Model.Name"
-        android:layout_margin="10dp"/>
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_large"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:height="20dp"
         android:text="@string/description_title"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_tiny"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
         local:MvxBind="Text Model.Description"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_large"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:height="20dp"
         android:text="@string/status_title"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_tiny"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:height="100dp"
+        android:textColor="@android:color/black"
         local:MvxBind="Text Model.Status"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_large"/>
+
+    <TextView
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@string/created_date"
+	    android:layout_margin="10dp"
+	    android:layout_marginTop="@dimen/margin_small"
+	    android:layout_marginLeft="@dimen/margin_small"
+	    android:layout_marginRight="@dimen/margin_small"
+	    android:layout_marginBottom="@dimen/margin_tiny"/>
+
+    <TextView
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:textColor="@android:color/black"
+	    local:MvxBind="Text DateToString(Model.CreatedDate)"
+	    android:layout_margin="10dp"
+	    android:layout_marginLeft="@dimen/margin_small"
+	    android:layout_marginRight="@dimen/margin_small"
+	    android:layout_marginBottom="@dimen/margin_large"/>
 
 </LinearLayout>

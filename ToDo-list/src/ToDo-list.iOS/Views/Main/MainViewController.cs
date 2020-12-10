@@ -43,7 +43,7 @@ namespace ToDo_list.iOS.Views.Main
                 TableView, 
                 UITableViewCellStyle.Subtitle,
                 new NSString("CustomCell"), 
-                "TitleText Name;DetailText Status");
+                "TitleText Name;DetailText IntToStatus(Status)");
 
             TableView.Source = _tableViewSource;
             TableView.TableFooterView = new UIView();

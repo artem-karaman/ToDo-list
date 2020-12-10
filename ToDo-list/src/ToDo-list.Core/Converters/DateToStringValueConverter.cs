@@ -4,9 +4,9 @@ using MvvmCross.Converters;
 
 namespace ToDo_list.Core.Converters
 {
-    public class DateToStringValueConverter : MvxValueConverter<DateTime, string>
+    public class DateToStringValueConverter : MvxValueConverter<DateTimeOffset, string>
     {
-        protected override string Convert(DateTime value, Type targetType, object parameter, CultureInfo culture)
+        protected override string Convert(DateTimeOffset value, Type targetType, object parameter, CultureInfo culture)
         {
             return value.ToString("d");
         }

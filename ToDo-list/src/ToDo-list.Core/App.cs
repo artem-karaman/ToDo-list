@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using MvvmCross;
 using MvvmCross.ViewModels;
 using ToDo_list.Core.Models;
@@ -17,7 +19,13 @@ namespace ToDo_list.Core
 
         private static void RegisterDependencies()
         {
-            Mvx.IoCProvider.RegisterSingleton<IDataStore<TaskModel>>(() => new MockDataStore());
+            //Mvx.IoCProvider.RegisterSingleton<IDataStore<TaskModel>>(() => new MockDataStore());
+
+            Mvx.IoCProvider.RegisterSingleton<IDataStore<TaskModel>>(() =>
+                new SqliteDataStore(
+                    Path.Combine(
+                        Environment.GetFolderPath(
+                            Environment.SpecialFolder.LocalApplicationData), "Tasks.db3")));
         }
     }
 }
