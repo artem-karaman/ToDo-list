@@ -6,6 +6,7 @@ using AndroidX.RecyclerView.Widget;
 using MvvmCross.DroidX.RecyclerView;
 using MvvmCross.Platforms.Android.Views;
 using ToDo_list.Core.ViewModels.Main;
+using ToDo_list.Droid.Helpers;
 
 namespace ToDo_list.Droid.Views.Main
 {
@@ -25,12 +26,20 @@ namespace ToDo_list.Droid.Views.Main
 
             var recyclerView = FindViewById<MvxRecyclerView>(Resource.Id.main_recycler_view);
             recyclerView?.AddItemDecoration(new DividerItemDecoration(recyclerView.Context, DividerItemDecoration.Vertical));
+            
+            var itemTouchHelper = new ItemTouchHelper(new ItemTouchHelperSimpleCallback(ViewModel));
+            itemTouchHelper.AttachToRecyclerView(recyclerView);
 
             SetSupportActionBar(toolbar);
 
             SupportActionBar.Title = "ToDo-list";
 
             ViewModel.LoadTasksCommandAsync.ExecuteAsync();
+        }
+
+        private ItemTouchHelper.Callback ItemTouchCallBack()
+        {
+            throw new System.NotImplementedException();
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
