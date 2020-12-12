@@ -1,3 +1,5 @@
+[![Hits-of-Code](https://hitsofcode.com/github/namarakM/ToDo-list?branch=main)](https://hitsofcode.com/github/namarakM/ToDo-list?branch=main/view?branch=main/)
+
 # ToDo-list
 Xamarin Native app - Xamarin.iOS, Xamarin.Android
 
