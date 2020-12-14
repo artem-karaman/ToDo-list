@@ -57,6 +57,25 @@ namespace ToDo_list.Core.ViewModels.Main
         {
             await NavigationService.Navigate<DetailViewModel, TaskViewModel>(
                 new TaskViewModel(model, Mode.Read));
+
+
+        }
+
+        void ReadDisc()
+        {
+            ReadDiscAsync();
+        }
+
+        private Task ReadDiscAsync()
+        {
+            Task t = new Task(StartNewAction);
+            t.Start();
+            return Task.CompletedTask;
+        }
+
+        private void StartNewAction()
+        {
+            
         }
 
         private async Task ShowDetailViewModelToCrateTaskCommandExecute()
