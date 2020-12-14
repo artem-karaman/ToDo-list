@@ -1,10 +1,7 @@
 ﻿using System;
-using MvvmCross;
 using MvvmCross.Commands;
-using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using ToDo_list.Core.Models;
-using ToDo_list.Core.Services;
 
 namespace ToDo_list.Core.ViewModels.Details
 {
@@ -12,9 +9,6 @@ namespace ToDo_list.Core.ViewModels.Details
     {
         private readonly TaskModel _taskModel;
         private Mode _mode;
-
-        private readonly IDataStore<TaskModel> _dataStore = Mvx.IoCProvider.Resolve<IDataStore<TaskModel>>();
-        private readonly IMvxNavigationService _navigationService = Mvx.IoCProvider.Resolve<IMvxNavigationService>();
 
         public TaskViewModel(TaskModel taskModel, Mode mode)
         {
@@ -71,9 +65,6 @@ namespace ToDo_list.Core.ViewModels.Details
             RaisePropertyChanged(() => Mode);
         }
 
-        private void StatusChangedCommandExecute(Status status)
-        {
-            Status = status;
-        }
+        private void StatusChangedCommandExecute(Status status) => Status = status;
     }
 }
