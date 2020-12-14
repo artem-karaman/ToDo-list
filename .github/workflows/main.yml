@@ -6,27 +6,28 @@ env:
   SOLUTION_NAME: ToDo-list
   ANDROID_PROJECT_NAME: ToDo-list.Droid
 
-jobs: 
-   Android:
-    name: Android
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - name: Building APK
-        uses: ./action
-        with:
-          args: /r:True /t:SignAndroidPackage /p:AndroidSdkDirectory=/android/sdk ${{env.SOLUTION_NAME}}/${{env.ANDROID_PROJECT_NAME}}/${{env.ANDROID_PROJECT_NAME}}.csproj
-      - name: Artifacts
-        run: |
+jobs:
+ Android:
+   name: Android
+   runs-on: ubuntu-latest
+   steps:
+     - uses: actions/checkout@master
+     - name: Building APK
+       uses: ./action
+       with:
+         args: /r:True /t:SignAndroidPackage /p:AndroidSdkDirectory=/android/sdk ${{env.SOLUTION_NAME}}/${{env.ANDROID_PROJECT_NAME}}/${{env.ANDROID_PROJECT_NAME}}.csproj
+     - name: Artifacts
+       run: |
           mkdir -p builds
           cp ${{env.SOLUTION_NAME}}/${{env.ANDROID_PROJECT_NAME}}/bin/Debug/*.apk builds
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v1
-        with:
-          name: builds
-          path: builds
-        
-  iOS:
+     - name: Upload Artifacts
+       uses: actions/upload-artifact@v1
+       with:
+         name: builds
+         path: builds  
+                  
+          
+ iOS:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v1
