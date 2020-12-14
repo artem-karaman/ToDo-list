@@ -37,11 +37,6 @@ namespace ToDo_list.Droid.Views.Main
             ViewModel.LoadTasksCommandAsync.ExecuteAsync();
         }
 
-        private ItemTouchHelper.Callback ItemTouchCallBack()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             base.MenuInflater.Inflate(Resource.Menu.add, menu);
